@@ -4,7 +4,7 @@
     public static class IO
     {
         /// <summary>
-        /// Animates typewriter effect
+        /// Animates the typewriter effect
         /// </summary>
         /// <param name="message">Message to be displayed</param>
         /// <param name="delay">Delay in ms between each letter</param>
