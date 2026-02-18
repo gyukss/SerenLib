@@ -40,5 +40,31 @@
             }
             return input;
         }
+
+        public static bool YesNo(string question)
+        {
+            string input = "";
+            string[] optionsYes = new string[] { "yes", "y" };
+            string[] optionsNo = new string[] { "no", "n" };
+            while (!optionsYes.Contains(input) && !optionsNo.Contains(input))
+            {
+                Console.WriteLine(question);
+                input = Console.ReadLine().ToLower().Trim();
+            }
+            return optionsYes.Contains(input);
+        }
+
+        public static bool TypeYesNo(string question, int delay = 60)
+        {
+            string input = "";
+            string[] optionsYes = new string[] { "yes", "y" };
+            string[] optionsNo = new string[] { "no", "n" };
+            while (!optionsYes.Contains(input) && !optionsNo.Contains(input))
+            {
+                Out(question, delay);
+                input = Console.ReadLine().ToLower().Trim();
+            }
+            return optionsYes.Contains(input);
+        }
     }
 }
