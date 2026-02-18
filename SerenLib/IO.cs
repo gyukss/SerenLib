@@ -20,5 +20,25 @@
             // Create new line once done IF newLine = true
             if(newLine)Console.WriteLine();
         }
+
+        /// <summary>
+        /// Gets valid input from user from an array of strings
+        /// </summary>
+        /// <param name="data">Array of strings</param>
+        /// <returns>Valid user input</returns>
+        public static string GetValidInput(string[] data, string errorMessage = null)
+        {
+            string input = "";
+            while (!data.Contains(input))
+            {
+                input = Console.ReadLine().ToLower().Trim();
+
+                if(errorMessage != null && !data.Contains(input))
+                {
+                    Out(errorMessage);
+                }
+            }
+            return input;
+        }
     }
 }
