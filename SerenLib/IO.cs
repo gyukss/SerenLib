@@ -66,5 +66,47 @@
             }
             return optionsYes.Contains(input);
         }
+
+        /// <summary>
+        /// Visual dropdown of options
+        /// </summary>
+        /// <param name="options">List of strings</param>
+        /// <returns>The option selected</returns>
+        public static string Dropdown(List<string> options)
+        {
+            // Stores the initial Y position of the cursor
+            int y = Console.CursorTop;
+            // Index is used as the identifier for index of the selected option, starting with [0]
+            int index = 0;
+            // Hides cursor
+            Console.CursorVisible = false;
+
+            while (true)
+            {
+                // Outputs each option
+                for (int i = 0; i < options.Count; i++)
+                {
+                    // If the current option being displayed is the selected one, add an identifier
+                    string head = i == index ? "> " : "  ";
+                    Console.WriteLine($"{head}{options[i]}");
+                }
+                // Stores the next key pressed
+                ConsoleKeyInfo key = Console.ReadKey(true);
+                // If S, selected option is down one, W, up one
+                if (key.Key == ConsoleKey.S) index++;
+                if (key.Key == ConsoleKey.W) index--;
+                // If enter (select) is pressed, break out of loop
+                if (key.Key == ConsoleKey.Enter) break;
+                // If index exists the confinements of the list, make it wrap around
+                if (index >= options.Count()) index = 0;
+                if (index < 0) index = options.Count() - 1;
+                // Set the cursor back to the start ready for next iteration
+                Console.SetCursorPosition(0, y);
+            } // After loop exited
+            // Restore cursor visibility
+            Console.CursorVisible = true;
+            // Return option selected
+            return options[index];
+        }
     }
 }
