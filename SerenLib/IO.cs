@@ -1,6 +1,7 @@
 ﻿namespace SerenLib.IO
 {
-   
+    using System.Collections.Generic;
+
     public static class IO
     {
         /// <summary>
@@ -107,6 +108,41 @@
             Console.CursorVisible = true;
             // Return option selected
             return options[index];
+        }
+
+        /// <summary>
+        /// Returns a selected option from a list
+        /// </summary>
+        /// <param name="options">List of options</param>
+        /// <returns>selected option as a string</returns>
+        public static string GetOption(List<string> options)
+        {
+            foreach (string option in options)
+                Console.WriteLine(option);
+
+            string input = null;
+
+            while (!options.Contains(input))
+            {
+                input = Console.ReadLine();
+                if (!options.Contains(input))
+                    Console.WriteLine($"{input} is not in the list");
+            }
+
+            return input;
+        }
+
+        /// <summary>
+        /// Outputs each item in a list
+        /// </summary>
+        /// <param name="options">List of options</param>
+        // <T> Tells c# its a generic method
+        public static void ListOptions<T>(List<T> options)
+        {
+            foreach (T option in options)
+            {
+                Console.WriteLine($"> {option}");
+            }
         }
     }
 }
