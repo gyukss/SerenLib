@@ -22,6 +22,23 @@
             if(newLine)Console.WriteLine();
         }
 
+        public static string? In(bool normalise = true, bool doTrim = true)
+        {
+            while (true)
+            {
+                string input = Console.ReadLine();
+                input = normalise ? input.ToLower() : input;
+                input = doTrim ? input.Trim() : input;
+                
+                if(string.IsNullOrEmpty(input))
+                {
+                    Console.WriteLine("Input cannot be empty.");
+                    continue;
+                }
+                return input;
+            }
+        }
+
         /// <summary>
         /// Gets valid input from user from an array of strings
         /// </summary>
@@ -143,6 +160,49 @@
             {
                 Console.WriteLine($"> {option}");
             }
+        }
+
+        public static string Carousel(params string[] items)
+        {
+            int activeIndex = 0;
+            while (true)
+            {
+                ClearLine();
+                Console.Write(items[activeIndex]);
+
+                ConsoleKeyInfo key = Console.ReadKey(true);
+                if(key.Key == ConsoleKey.RightArrow)
+                {
+                    activeIndex++;
+                }
+                else if(key.Key == ConsoleKey.LeftArrow)
+                {
+                    activeIndex--;
+                }
+                else if(key.Key == ConsoleKey.Enter)
+                {
+                    break;
+                }
+
+                if (activeIndex > items.Length - 1)
+                {
+                    activeIndex = 0;
+                }
+                else if (activeIndex < 0)
+                {
+                    activeIndex = items.Length - 1;
+                }
+            }
+
+            Console.WriteLine();
+            return items[activeIndex];
+        }
+
+        public static void ClearLine()
+        {
+            Console.SetCursorPosition(0, Console.CursorTop);
+            Console.Write(new string(' ', Console.WindowWidth));
+            Console.SetCursorPosition(0, Console.CursorTop);
         }
     }
 }
