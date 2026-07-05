@@ -11,5 +11,11 @@
         {
             return (double)(celsius + 273.15);
         }
+
+        public static bool FiftyFifty()
+        {
+            Random random = new Random();
+            return random.Next(2) == 0;           
+        }
     }
 }
